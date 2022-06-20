@@ -1,15 +1,14 @@
 from flask import Flask, redirect
-import random, requests
-import gunicorn
+import requests
 
 app = Flask(__name__)
 
 
-@app.route("/")
-def home():
-    url = "https://api.npoint.io/ebbdbf2551af841022dc"
+@app.route("/<index>")
+def manager(index):
+    url = "https://api.npoint.io/83316894f4c0ca891969"
     list_website =  requests.get(url).json()["list"]
-    return redirect(random.choice(list_website))
+    return redirect(list_website[int(index)])
 
 if __name__ == "__main__":
     app.run()
